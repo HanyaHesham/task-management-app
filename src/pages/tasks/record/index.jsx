@@ -1,5 +1,10 @@
 import React from "react";
+import CustomCard from "../../../components/Card";
 
 export default function AllTasks() {
-  return <div>AllTasks</div>;
+  return (
+    <>
+      <CustomCard title="First task" status="completed" />
+    </>
+  );
 }
