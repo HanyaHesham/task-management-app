@@ -1,0 +1,91 @@
+@for $i from 0 through 16 {
+  .pt-#{$i} {
+    padding-top: #{$i}rem;
+  }
+  .pb-#{$i} {
+    padding-bottom: #{$i}rem;
+  }
+
+  .pl-#{$i} {
+    padding-left: #{$i}rem;
+  }
+  .pr-#{$i} {
+    padding-right: #{$i}rem;
+  }
+  .py-#{$i} {
+    padding: #{$i}rem 0;
+  }
+  .mr-#{$i} {
+    margin-right: #{$i}rem;
+  }
+  .ml-#{$i} {
+    margin-left: #{$i}rem;
+  }
+  .mt-#{$i} {
+    margin-top: #{$i}rem;
+  }
+  .mb-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
+}
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+// @each $color, $value in $colors {
+//   .#{$color}--text {
+//     color: $value !important;
+//   }
+//   .#{$color} {
+//     background-color: $value !important;
+//     color: getColor(white) !important;
+//   }
+// }
+
+.h-100 {
+  @include desktop() {
+    min-height: 100vh !important;
+  }
+}
+
+.hidden-md-and-down {
+  @include tablet {
+    display: none;
+  }
+}
+
+.d-flex{
+  display: flex;
+}
+.flex-column {
+  flex-direction: column !important;
+}
+.justify-center {
+  justify-content: center !important;
+}
+.justify-between {
+  justify-content: space-between !important;
+}
+
+.justify-end {
+  justify-content: end !important;
+}
+.d-flex {
+  display: flex !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+
+@media (max-width: 767px) {
+  .text-xs-center {
+    text-align: center !important;
+    justify-content: center !important;
+    // align-items: center !important;
+  }
+}

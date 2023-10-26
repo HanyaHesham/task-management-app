@@ -1,0 +1,23 @@
+* {
+  font-family: "Bahij TheSansArabic";
+}
+a {
+  text-decoration: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background: #25293c;
+  border-radius: 5px;
+}
+.ant-breadcrumb-link {
+  &:hover {
+    background: transparent !important;
+  }
+}
