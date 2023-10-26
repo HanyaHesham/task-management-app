@@ -1,7 +1,7 @@
 import { lazy } from "react";
-const TasksRecord = lazy(() => import("../../pages/tasks/record"));
-const AddTasks = lazy(() => import("../../pages/tasks/crud"));
-const AboutPage = lazy(() => import("../../pages/aboutPage"));
+const TasksRecord = lazy(() => import("../../pages/Tasks/record"));
+const AddTasks = lazy(() => import("../../pages/Tasks/crud"));
+const AboutPage = lazy(() => import("../../pages/AboutPage"));
 
 export const asyncRoutes = [
   {
