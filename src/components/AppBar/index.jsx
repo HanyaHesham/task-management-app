@@ -3,8 +3,8 @@ import {
   MenuUnfoldOutlined,
   DashboardOutlined,
   InfoCircleOutlined,
-  UserOutlined,
   PlusCircleOutlined,
+  FileOutlined,
 } from "@ant-design/icons";
 import { Layout, theme } from "antd";
 import React, { useState } from "react";
@@ -42,13 +42,13 @@ function AppBar({ expand, onChange, drawerWidth }) {
     },
     {
       key: "/tasks/record",
-      icon: <UserOutlined />,
+      icon: <FileOutlined />,
       title: "Tasks",
       activeRoutes: ["/tasks/record", "/tasks/add"],
       children: [
         {
           key: "/tasks/record",
-          icon: <UserOutlined />,
+          icon: <FileOutlined />,
           title: "All Tasks",
           path: "/tasks/record",
         },
