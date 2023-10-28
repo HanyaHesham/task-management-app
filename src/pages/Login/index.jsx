@@ -1,15 +1,31 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { api_url } from "../../config/config";
 
 export default function Login() {
   const formRef = useRef();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-    navigate("/");
+  const onSubmit = async (values) => {
+    setError(null);
+    const response = await axios
+      .post(`${api_url}/login`, values)
+      .catch((err) => {
+        if (err & err.response) setError(err.response.data.message);
+      });
+    console.log("Response:", response);
+
+    if (response && response.status === 200) {
+      navigate("/");
+      alert("Welcome Admin");
+    } else {
+      alert("Invalid Credentials");
+    }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -20,9 +36,9 @@ export default function Login() {
         <div className="form-container">
           <Form
             name="login"
-            onFinish={onFinish}
+            onFinish={onSubmit}
             onFinishFailed={onFinishFailed}
-            ref={formRef}
+            // ref={formRef}
           >
             <div className=" fw-500">
               <h2>Welcome!</h2>
