@@ -6,17 +6,7 @@ import { http } from "../../../config/http";
 
 export default function AllTasks() {
   const [tasksData, setTasksData] = useState([]);
-
   const [loading, setLoading] = useState(true);
-
-  // const handleGetTasks = async () => {
-  //   setLoading(true);
-
-  //   const res = await http.get(`${api_url}/tasks`);
-  //   const { data } = res.data;
-  //   setLoading(false);
-  //   setTasksData(data);
-  // };
 
   const handleGetTasks = async () => {
     setLoading(true);
