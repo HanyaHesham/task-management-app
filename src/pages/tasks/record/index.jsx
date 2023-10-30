@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import CustomCard from "../../../components/Card";
 import { getAllTasks } from "./service";
-import { api_url } from "../../../config/config";
-import { http } from "../../../config/http";
+import { Button, Col, Row, Table } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 
 export default function AllTasks() {
   const [tasksData, setTasksData] = useState([]);
@@ -12,9 +11,7 @@ export default function AllTasks() {
     setLoading(true);
     await getAllTasks()
       .then((res) => {
-        console.log(res.data);
-
-        const { data } = res.data;
+        const { data } = res;
         setTasksData(data);
       })
       .catch((err) => {
@@ -27,16 +24,48 @@ export default function AllTasks() {
     handleGetTasks();
   }, []);
 
+  const columns = [
+    {
+      title: "name",
+      key: "name",
+      dataIndex: "name",
+      render: (name) => <>{name || "---"}</>,
+    },
+    {
+      title: "status",
+      key: "status",
+      dataIndex: "status",
+      render: (status) => <>{status || "---"}</>,
+    },
+
+    {
+      title: "actions",
+      key: "actions",
+      dataIndex: "actions",
+
+      render: (actions, _) => {
+        return (
+          <div>
+            <Button type="outlined" shape="round" icon={<DeleteOutlined />}>
+              Delete
+            </Button>
+
+            <Button type="outlined" shape="round">
+              Change Status
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <>
-      {!loading &&
-        tasksData &&
-        tasksData?.length > 0 &&
-        tasksData?.map((item, index) => (
-          <div key={index}>
-            <CustomCard title={item.name} status={item.status} />
-          </div>
-        ))}
+      <Row>
+        <Col xs={24}>
+          <Table columns={columns} dataSource={tasksData} loading={loading} />
+        </Col>
+      </Row>
     </>
   );
 }

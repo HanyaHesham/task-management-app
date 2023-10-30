@@ -3,6 +3,7 @@ import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { api_url } from "../../config/config";
+import cookie from "js-cookie";
 
 export default function Login() {
   const formRef = useRef();
@@ -19,8 +20,10 @@ export default function Login() {
     console.log("Response:", response);
 
     if (response && response.status === 200) {
+      const { token } = response.data;
+      // Set the token using js-cookie
+      cookie.set("token", token);
       navigate("/");
-      alert("Welcome Admin");
     } else {
       alert("Invalid Credentials");
     }
@@ -29,6 +32,8 @@ export default function Login() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+
 
   return (
     <>
