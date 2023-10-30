@@ -41,7 +41,7 @@ export default function AllTasks() {
     <>
       <Row>
         <Col xs={24}>
-          {!loading &&
+          {(!loading &&
             tasksData &&
             tasksData?.length > 0 &&
             tasksData?.map((item, index) => (
@@ -75,7 +75,13 @@ export default function AllTasks() {
                   </Row>
                 </Row>
               </Card>
-            ))}
+            ))) || (
+            <>
+              <div className=" fw-500 text-center">
+                <h2>There are no Tasks yet</h2>
+              </div>
+            </>
+          )}
         </Col>
       </Row>
     </>
