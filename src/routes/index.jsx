@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import { asyncRoutes } from "./asyncRoutes";
-const MainLayout = lazy(() => import("../components/AppBar"));
+const MainLayout = lazy(() => import("../components/Layout"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const NotFound = lazy(() => import("../pages/notFoundPage"));
 const Login = lazy(() => import("../pages/Login"));

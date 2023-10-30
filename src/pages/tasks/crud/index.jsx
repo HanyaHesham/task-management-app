@@ -1,29 +1,39 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select, message } from "antd";
 import { createTask } from "./service";
 
 export default function AddTasks() {
   const [form] = Form.useForm();
-  const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleCreateTask = () => {
-    const payload = {
-      name: name,
-      status: status,
-    };
-    setLoading(true);
-    createTask(payload)
-      .then((response) => {
-        // Handle success
-        console.log(response);
+    form
+      .validateFields()
+      .then((values) => {
+        const payload = {
+          name: values.name,
+          status: "active",
+        };
+        setLoading(true);
+        createTask(payload)
+          .then((response) => {
+            // Handle success
+            console.log(response);
+            message.success("Task added successfully");
+            form.resetFields();
+          })
+          .catch((error) => {
+            // Handle error
+            console.log(error);
+            message.error("Failed to add task");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
       })
       .catch((error) => {
-        // Handle error
-        console.log(error);
+        console.log("Field validation error:", error);
       });
-    setLoading(false);
   };
 
   return (
@@ -32,7 +42,6 @@ export default function AddTasks() {
         <div className=" fw-500">
           <h2>Add New Task</h2>
         </div>
-
         <Form.Item
           name="name"
           label="Task Name"
@@ -43,21 +52,13 @@ export default function AddTasks() {
             },
           ]}
         >
-          <Input value={name} onChange={(e) => setName(e.target.value)} />
+          <Input />
         </Form.Item>
-        <Form.Item
-          name="status"
-          label="Task Status"
-          rules={[
-            {
-              required: true,
-              message: "Please input task status",
-            },
-          ]}
-        >
+        <Form.Item name="status" label="Task Status">
           <Select
-            value={status}
             placeholder="Select"
+            defaultValue="active"
+            disabled
             options={[
               {
                 value: "completed",
@@ -68,7 +69,6 @@ export default function AddTasks() {
                 label: "active",
               },
             ]}
-            onChange={(value) => setStatus(value)}
           />
         </Form.Item>
 

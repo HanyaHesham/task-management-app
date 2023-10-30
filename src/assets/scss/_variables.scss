@@ -1,32 +1,4 @@
 $colors: (
-  primary: #0065b0,
-  secondary: #2487c1,
-  white: #fff,
-  light-primary: #0065b008,
-  light-blue: #f6fbff,
-  shadow-color: #0065b00d,
-  light-gray: #f5f6fa,
-  light-gray-2: #acacac,
-  black: #000,
-  gray: #515151,
-  table-header--dark:
-    rgba(
-      $color: #3498db,
-      $alpha: 0.15,
-    ),
-);
-
-$darkColors: (
-  primary: #020b11,
-  secondary: #2487c1,
-  white: #fff,
-  light-primary: #0065b008,
-  light-gray: #f5f6fa,
-  black: #000,
-  table-header--dark:
-    rgba(
-      $color: #3498db,
-      $alpha: 0.15,
-    ),
-  body-bg: #2f3349,
+  primary-background: #f5f5f5,
+  primary: #25293c,
 );
