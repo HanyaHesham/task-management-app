@@ -28,9 +28,7 @@ export default function Login() {
       );
     if (foundUser) {
       const { token, id } = foundUser;
-
       localStorage.setItem("userId", id);
-      console.log(foundUser, "ss");
       cookie.set("token", token);
       message.success("Welcome");
       navigate("/");
