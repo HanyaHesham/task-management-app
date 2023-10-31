@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, Input, Select, message } from "antd";
 import { createTask } from "./service";
+import { UserContext } from "../../Login/index";
 
 export default function AddTasks() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+
+  const userId = useContext(UserContext);
 
   const handleCreateTask = () => {
     form
@@ -13,6 +16,7 @@ export default function AddTasks() {
         const payload = {
           name: values.name,
           status: "active",
+          userId: userId?.id,
         };
         setLoading(true);
         createTask(payload)

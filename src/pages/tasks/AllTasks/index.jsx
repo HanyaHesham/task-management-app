@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllTasks, deleteTaskById, updateTaskStatus } from "./service";
 import { Button, Col, Row, Card } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import { Progress } from "antd";
 
 export default function AllTasks() {
   const [tasksData, setTasksData] = useState([]);
@@ -91,14 +92,18 @@ export default function AllTasks() {
             filteredTasks.map((item, index) => (
               <Card
                 key={index}
-                title={item.name}
+                title={item?.name}
                 bordered={false}
                 className="mb-2"
               >
+                <Col xs={20} md={12}>
+                  {item?.status === "completed" ? (
+                    <Progress percent={100} format={() => item?.status} />
+                  ) : (
+                    <Progress percent={50} format={() => item?.status} />
+                  )}
+                </Col>
                 <Row>
-                  <Col xs={24}>
-                    <p>Status is: {item.status}</p>
-                  </Col>
                   <Row>
                     <Col xs={24} md={12}>
                       <Button

@@ -33,8 +33,7 @@ const MainLayout = () => {
   const handleLogout = () => {
     // Remove the token from js-cookie
     cookie.remove("token");
-    // Redirect to the desired page or perform further actions
-    // Example: Redirect to the login page
+
     navigate("/login");
   };
 
