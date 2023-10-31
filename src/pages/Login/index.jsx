@@ -46,11 +46,12 @@ export default function Login() {
     handleGetAllUsers();
   }, []);
 
+  const userId = usersData && usersData.find((user) => user.id);
+  // console.log(userId?.id, "user");
+
   return (
     <>
-      <UserContext.Provider
-        value={usersData && usersData.find((user) => user.id)}
-      >
+      <UserContext.Provider value={userId?.id}>
         <div className="signIn-page w-100">
           <div className="form-container">
             <Form

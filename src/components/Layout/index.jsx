@@ -8,7 +8,7 @@ import cookie from "js-cookie";
 
 const { Header, Content, Footer } = Layout;
 
-const MainLayout = () => {
+export default function MainLayout() {
   const token = cookie.get("token");
   const navigate = useNavigate();
 
@@ -33,7 +33,6 @@ const MainLayout = () => {
   const handleLogout = () => {
     // Remove the token from js-cookie
     cookie.remove("token");
-
     navigate("/login");
   };
 
@@ -77,5 +76,4 @@ const MainLayout = () => {
       )}
     </>
   );
-};
-export default MainLayout;
+}

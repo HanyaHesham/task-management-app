@@ -8,6 +8,7 @@ export default function AddTasks() {
   const [loading, setLoading] = useState(false);
 
   const userId = useContext(UserContext);
+  // console.log(userId, "userId");
 
   const handleCreateTask = () => {
     form
@@ -16,7 +17,7 @@ export default function AddTasks() {
         const payload = {
           name: values.name,
           status: "active",
-          userId: userId?.id,
+          userId,
         };
         setLoading(true);
         createTask(payload)

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAllTasks, deleteTaskById, updateTaskStatus } from "./service";
-import { Button, Col, Row, Card } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
-import { Progress } from "antd";
+import { Button, Col, Row, Card, Progress } from "antd";
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 export default function AllTasks() {
   const [tasksData, setTasksData] = useState([]);
@@ -105,9 +105,21 @@ export default function AllTasks() {
                 </Col>
                 <Row>
                   <Row>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} md={8}>
+                      <Link to={`/tasks/view/${item.id}`}>
+                        <Button
+                          className="mb-1"
+                          shape="round"
+                          icon={<EyeOutlined />}
+                          size="large"
+                        >
+                          View
+                        </Button>
+                      </Link>
+                    </Col>
+                    <Col xs={24} md={8}>
                       <Button
-                        type="outlined"
+                        className="mb-1"
                         shape="round"
                         icon={<DeleteOutlined />}
                         size="large"
@@ -116,9 +128,9 @@ export default function AllTasks() {
                         Delete
                       </Button>
                     </Col>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} md={8}>
                       <Button
-                        type="outlined"
+                        className="mb-1"
                         shape="round"
                         size="large"
                         onClick={() => handleChangeStatus(item.id, item.status)}
@@ -131,7 +143,7 @@ export default function AllTasks() {
               </Card>
             ))) || (
             <>
-              <div className=" fw-500 text-center">
+              <div className="fw-500 text-center">
                 <h2>There are no Tasks yet</h2>
               </div>
             </>
