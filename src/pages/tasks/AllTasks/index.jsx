@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllTasks, deleteTaskById, updateTaskStatus } from "./service";
-import { Button, Col, Row, Card, Progress } from "antd";
+import { Button, Col, Row, Card, Progress, Tag } from "antd";
 import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -65,7 +65,7 @@ export default function AllTasks() {
   return (
     <>
       <Row>
-        <Col xs={24}>
+        <Col xs={24} md={12}>
           <div className="mb-2">
             <Button
               type="primary"
@@ -99,9 +99,11 @@ export default function AllTasks() {
               >
                 <Col xs={20} md={12}>
                   {item?.status === "completed" ? (
-                    <Progress percent={100} format={() => item?.status} />
+                    // <Progress percent={100} format={() => item?.status} />
+                    <Tag color="success">{item?.status}</Tag>
                   ) : (
-                    <Progress percent={50} format={() => item?.status} />
+                    // <Progress percent={50} format={() => item?.status} />
+                    <Tag color="processing">{item?.status}</Tag>
                   )}
                 </Col>
                 <Row>
@@ -112,7 +114,6 @@ export default function AllTasks() {
                           className="mb-1"
                           shape="round"
                           icon={<EyeOutlined />}
-                          size="large"
                         >
                           View
                         </Button>
@@ -123,7 +124,6 @@ export default function AllTasks() {
                         className="mb-1"
                         shape="round"
                         icon={<DeleteOutlined />}
-                        size="large"
                         onClick={() => handleDeleteTask(item.id)}
                       >
                         Delete
@@ -133,7 +133,6 @@ export default function AllTasks() {
                       <Button
                         className="mb-1"
                         shape="round"
-                        size="large"
                         onClick={() => handleChangeStatus(item.id, item.status)}
                       >
                         Change Status

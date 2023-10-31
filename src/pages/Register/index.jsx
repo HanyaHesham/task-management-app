@@ -50,8 +50,10 @@ export default function Register() {
             name="register"
             onFinish={onSubmit}
             scrollToFirstError
+            labelCol={{ span: 5 }}
+            wrapperCol={{ span: 16 }}
           >
-            <div className=" fw-500">
+            <div className="fw-500 text-center">
               <h2>Welcome!</h2>
             </div>
 
@@ -114,17 +116,19 @@ export default function Register() {
             </Form.Item>
 
             <Form.Item>
-              <Button
-                loading={loading}
-                type="primary"
-                htmlType="submit"
-                className="register-form-button"
-              >
-                Register
-              </Button>
+              <div className="text-center">
+                <Button
+                  loading={loading}
+                  type="primary"
+                  htmlType="submit"
+                  className="register-form-button"
+                >
+                  Register
+                </Button>
 
-              <span>Or </span>
-              <a href="/login">login Now!</a>
+                <span>Or </span>
+                <a href="/login">login Now!</a>
+              </div>
             </Form.Item>
           </Form>
         </div>

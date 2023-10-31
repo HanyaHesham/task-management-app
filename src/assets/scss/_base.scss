@@ -26,10 +26,25 @@ a {
   width: 50%;
   background: #fff;
   border-radius: 24px;
-  text-align: center;
   margin: 40px auto;
   height: fit-content;
   padding: 72px 24px;
   box-shadow: 0px 1.8882px 15.1056px rgba(0, 0, 0, 0.05);
   position: relative;
+}
+:where(.css-dev-only-do-not-override-xu9wm8).ant-tag-processing {
+  color: #1677ff;
+  background: #e6f4ff;
+  border-color: #91caff;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+:where(.css-dev-only-do-not-override-xu9wm8).ant-tag-success {
+  color: #52c41a;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 20px;
 }

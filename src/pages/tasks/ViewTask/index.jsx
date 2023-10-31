@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row, Card, Progress } from "antd";
+import { Button, Col, Row, Card, Tag } from "antd";
 import { getTaskById } from "./service";
 import { useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -29,16 +29,16 @@ export default function ViewTask() {
       <Card title={taskData?.name} bordered={false} className="mb-2">
         <Col xs={20} md={12}>
           {taskData?.status === "completed" ? (
-            <Progress percent={100} format={() => taskData?.status} />
+            <Tag color="success">{taskData?.status}</Tag>
           ) : (
-            <Progress percent={50} format={() => taskData?.status} />
+            <Tag color="processing">{taskData?.status}</Tag>
           )}
         </Col>
         <Row>
           <Col xs={24} md={8}>
             <Link to="/tasks/all-tasks">
               <Button
-                className="mb-1"
+                className="mb-1 mt-1"
                 shape="round"
                 icon={<ArrowLeftOutlined />}
                 size="large"

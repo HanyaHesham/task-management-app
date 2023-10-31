@@ -53,8 +53,10 @@ export default function Login() {
             name="login"
             onFinish={onSubmit}
             onFinishFailed={onFinishFailed}
+            labelCol={{ span: 5 }}
+            wrapperCol={{ span: 16 }}
           >
-            <div className=" fw-500">
+            <div className="fw-500 text-center">
               <h2>Welcome!</h2>
             </div>
 
@@ -89,16 +91,18 @@ export default function Login() {
             </Form.Item>
 
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Log in
-              </Button>
+              <div className="text-center">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                >
+                  Log in
+                </Button>
 
-              <span>Or </span>
-              <a href="/register">Register Now!</a>
+                <span>Or </span>
+                <a href="/register">Register Now!</a>
+              </div>
             </Form.Item>
           </Form>
         </div>

@@ -40,52 +40,62 @@ export default function AddTasks() {
 
   return (
     <>
-      <Form form={form} name="createTask" scrollToFirstError>
-        <div className=" fw-500">
-          <h2>Add New Task</h2>
-        </div>
-        <Form.Item
-          name="name"
-          label="Task Name"
-          rules={[
-            {
-              required: true,
-              message: "Please input your task name!",
-            },
-          ]}
+      <div className="form-container">
+        <Form
+          form={form}
+          name="createTask"
+          scrollToFirstError
+          labelCol={{ span: 5 }}
+          wrapperCol={{ span: 14 }}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item name="status" label="Task Status">
-          <Select
-            placeholder="Select"
-            defaultValue="active"
-            disabled
-            options={[
+          <div className="fw-500 text-center">
+            <h2>Add New Task</h2>
+          </div>
+          <Form.Item
+            name="name"
+            label="Name"
+            rules={[
               {
-                value: "completed",
-                label: "completed",
-              },
-              {
-                value: "active",
-                label: "active",
+                required: true,
+                message: "Please input your task name!",
               },
             ]}
-          />
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            loading={loading}
-            type="primary"
-            htmlType="submit"
-            className="add-btn"
-            onClick={() => handleCreateTask()}
           >
-            Add Task
-          </Button>
-        </Form.Item>
-      </Form>
+            <Input />
+          </Form.Item>
+          <Form.Item name="status" label="Status">
+            <Select
+              placeholder="Select"
+              defaultValue="active"
+              disabled
+              options={[
+                {
+                  value: "completed",
+                  label: "completed",
+                },
+                {
+                  value: "active",
+                  label: "active",
+                },
+              ]}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <div className="text-center">
+              <Button
+                loading={loading}
+                type="primary"
+                htmlType="submit"
+                className="add-btn"
+                onClick={() => handleCreateTask()}
+              >
+                Add Task
+              </Button>
+            </div>
+          </Form.Item>
+        </Form>
+      </div>
     </>
   );
 }
