@@ -33,6 +33,7 @@ export default function MainLayout() {
   const handleLogout = () => {
     // Remove the token from js-cookie
     cookie.remove("token");
+    localStorage.removeItem("userId");
     navigate("/login");
   };
 
@@ -46,9 +47,7 @@ export default function MainLayout() {
             {menuItems &&
               menuItems?.map((item, index) => {
                 return (
-                  <>
-                    <NavItem key={index} to={item.path} title={item.title} />
-                  </>
+                  <NavItem key={index} to={item.path} title={item.title} />
                 );
               })}
             <div>

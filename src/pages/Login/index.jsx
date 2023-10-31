@@ -1,10 +1,8 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import { getAllUsers } from "./service";
-
-export const UserContext = createContext();
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +27,10 @@ export default function Login() {
         (user) => user.email === email && user.password === password
       );
     if (foundUser) {
-      const { token } = usersData && usersData.find((user) => user.id);
+      const { token, id } = foundUser;
+
+      localStorage.setItem("userId", id);
+      console.log(foundUser, "ss");
       cookie.set("token", token);
       message.success("Welcome");
       navigate("/");
@@ -46,69 +47,64 @@ export default function Login() {
     handleGetAllUsers();
   }, []);
 
-  const userId = usersData && usersData.find((user) => user.id);
-  // console.log(userId?.id, "user");
-
   return (
     <>
-      <UserContext.Provider value={userId?.id}>
-        <div className="signIn-page w-100">
-          <div className="form-container">
-            <Form
-              name="login"
-              onFinish={onSubmit}
-              onFinishFailed={onFinishFailed}
+      <div className="signIn-page w-100">
+        <div className="form-container">
+          <Form
+            name="login"
+            onFinish={onSubmit}
+            onFinishFailed={onFinishFailed}
+          >
+            <div className=" fw-500">
+              <h2>Welcome!</h2>
+            </div>
+
+            <Form.Item
+              name="email"
+              label="E-mail"
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!",
+                },
+                {
+                  required: true,
+                  message: "Please input your E-mail!",
+                },
+              ]}
             >
-              <div className=" fw-500">
-                <h2>Welcome!</h2>
-              </div>
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                name="email"
-                label="E-mail"
-                rules={[
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail!",
-                  },
-                  {
-                    required: true,
-                    message: "Please input your E-mail!",
-                  },
-                ]}
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
               >
-                <Input />
-              </Form.Item>
+                Log in
+              </Button>
 
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                >
-                  Log in
-                </Button>
-
-                <span>Or </span>
-                <a href="/register">Register Now!</a>
-              </Form.Item>
-            </Form>
-          </div>
+              <span>Or </span>
+              <a href="/register">Register Now!</a>
+            </Form.Item>
+          </Form>
         </div>
-      </UserContext.Provider>
+      </div>
     </>
   );
 }

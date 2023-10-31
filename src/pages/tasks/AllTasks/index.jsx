@@ -10,11 +10,12 @@ export default function AllTasks() {
   const [filterStatus, setFilterStatus] = useState(null);
 
   const handleGetTasks = async () => {
+    const userId = localStorage.getItem("userId");
     setLoading(true);
     await getAllTasks()
       .then((res) => {
         const { data } = res;
-        setTasksData(data);
+        setTasksData(data.filter((x) => Number(x.userId) === Number(userId)));
       })
       .catch((err) => {
         console.log(err);
@@ -104,7 +105,7 @@ export default function AllTasks() {
                   )}
                 </Col>
                 <Row>
-                  <Row>
+                  <Row className="mt-1">
                     <Col xs={24} md={8}>
                       <Link to={`/tasks/view/${item.id}`}>
                         <Button
