@@ -19,7 +19,7 @@ export default function AddTasks() {
           .then((response) => {
             // Handle success
             console.log(response);
-            message.success("Task added successfully");
+            message.success("Task added Successfully");
             form.resetFields();
           })
           .catch((error) => {

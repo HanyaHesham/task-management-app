@@ -1,27 +1,33 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { api_url } from "../../config/config";
 import cookie from "js-cookie";
+import { getAllUsers } from "./service";
 
 export default function Login() {
-  const formRef = useRef();
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  const [usersData, setUsersData] = useState([]);
 
-  const onSubmit = async (values) => {
-    setError(null);
-    const response = await axios
-      .post(`${api_url}/login`, values)
+  const handleGetAllUsers = async () => {
+    await getAllUsers()
+      .then((res) => {
+        const { data } = res;
+        setUsersData(data);
+      })
       .catch((err) => {
-        if (err & err.response) setError(err.response.data.message);
+        console.log(err);
       });
-    console.log("Response:", response);
+  };
 
-    if (response && response.status === 200) {
-      const { token } = response.data;
-      // Set the token using js-cookie
+  const onSubmit = (values) => {
+    const { email, password } = values;
+    const foundUser =
+      usersData &&
+      usersData.find(
+        (user) => user.email === email && user.password === password
+      );
+    if (foundUser) {
+      const { token } = usersData && usersData.find((user) => user.id);
       cookie.set("token", token);
       message.success("Welcome");
       navigate("/");
@@ -34,6 +40,10 @@ export default function Login() {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    handleGetAllUsers();
+  }, []);
+
   return (
     <>
       <div className="signIn-page w-100">
@@ -42,7 +52,6 @@ export default function Login() {
             name="login"
             onFinish={onSubmit}
             onFinishFailed={onFinishFailed}
-            // ref={formRef}
           >
             <div className=" fw-500">
               <h2>Welcome!</h2>

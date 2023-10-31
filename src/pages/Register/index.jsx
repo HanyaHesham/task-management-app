@@ -1,12 +1,46 @@
 import React, { useState } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
+import { createUser } from "./service";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreateUser = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        const payload = {
+          email: values.email,
+          password: values.password,
+        };
+        setLoading(true);
+        createUser(payload)
+          .then((response) => {
+            // Handle success
+            console.log(response);
+            message.success("User created successfully");
+            navigate("/login");
+          })
+          .catch((error) => {
+            // Handle error
+            console.log(error);
+            message.error("Failed to create user");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      })
+      .catch((error) => {
+        console.log("Field validation error:", error);
+      });
   };
 
+  const onSubmit = (values) => {
+    handleCreateUser();
+  };
   return (
     <>
       <div className="signIn-page w-100">
@@ -14,7 +48,7 @@ export default function Register() {
           <Form
             form={form}
             name="register"
-            onFinish={onFinish}
+            onFinish={onSubmit}
             scrollToFirstError
           >
             <div className=" fw-500">
@@ -81,6 +115,7 @@ export default function Register() {
 
             <Form.Item>
               <Button
+                loading={loading}
                 type="primary"
                 htmlType="submit"
                 className="register-form-button"
