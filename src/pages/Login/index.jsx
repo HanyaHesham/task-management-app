@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { api_url } from "../../config/config";
@@ -23,17 +23,16 @@ export default function Login() {
       const { token } = response.data;
       // Set the token using js-cookie
       cookie.set("token", token);
+      message.success("Welcome");
       navigate("/");
     } else {
-      alert("Invalid Credentials");
+      message.error("Invalid login credentials");
     }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
-
 
   return (
     <>
