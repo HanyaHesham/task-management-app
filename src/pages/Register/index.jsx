@@ -38,7 +38,7 @@ export default function Register() {
       });
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = () => {
     handleCreateUser();
   };
   return (
